@@ -66,7 +66,7 @@ Docker image for ioBroker (http://iobroker.net) based on debian:latest (http://h
 
 MIT License
 
-Copyright (c) 2017 Andre Germann
+Copyright (c) 2018 Micha1912
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -88,4 +88,4 @@ SOFTWARE.
 
 ## Credits
 
-Inspired by https://github.com/MehrCurry/docker-iobroker
+Inspired by https://github.com/buanet/docker-iobroker
