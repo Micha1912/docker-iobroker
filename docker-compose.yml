@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+  iobroker:
+    privileged: true
+    stdin_open: true
+    tty: true
+    restart: always
+    ports:
+      - "1880:1880"  #node-red
+      #- "1883:1883"  #mqtt
+      - "2001:2001"  #homematic
+      - "8081:8081"  #iobroker admin
+      - "8282:8282"  #flot
+      - "8088:8088"  #terminal 
+      - "8284:8284"  #socketIO
+      #- "6666:6666/udp"  #tuya Adapter
+      #- "8887:8887"  #tuya proxy
+      #- "8889:8889"  #tuya proxy-web
+    volumes:
+      - /dev:/dev
+      - ./iobroker:/opt/iobroker
+    hostname: iobroker
+    container_name: iobroker
+    
+    build: ./iobroker
+    networks:
+            - iobroker-network
+    depends_on:
+        - "mysql"
+   
+  mysql:
+        restart: always
+        expose:
+            - "3306"
+            - "33060"
+        ports:
+            - "3306:3306"
+            - "33060:33060"
+        image: mysql/mysql-server:latest
+        volumes:
+            #- ./mysql/init.sql:/docker-entrypoint-initdb.d/iobroker-init.sql
+            - ./mysql/data:/var/lib/mysql
+        environment:
+            - MYSQL_RANDOM_ROOT_PASSWORD=yes
+        networks:
+            - iobroker-network
+
+networks:
+    iobroker-network:
+        driver: bridge
