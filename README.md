@@ -6,9 +6,6 @@ Cause the container ist based on debian:latest, it acts nearly like a full virtu
 
 ## Installation & Usage
 
-A detailed tutorial (german) can be found on my website (https://buanet.de/2017/09/iobroker-unter-docker-auf-der-synology-diskstation/).<br>
-For discussion and support please visit ioBroker-forum-thread (http://forum.iobroker.net/viewtopic.php?f=17&t=5089) or use the comments section at the linked tutorial. Please do not contact me directly for any support-reasons. Every support-question should be answered in a public place. Thank you.
-
 
 ## Changelog
 
