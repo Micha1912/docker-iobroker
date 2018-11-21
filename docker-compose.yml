@@ -5,6 +5,7 @@ services:
     privileged: true
     stdin_open: true
     tty: true
+    build: ./iobroker
     restart: always
     ports:
       - "1880:1880"  #node-red
@@ -22,9 +23,7 @@ services:
       - /opt/iobroker:/opt/iobroker
     hostname: iobroker
     container_name: iobroker
-    
-    build: ./iobroker
-    links:
+      links:
         - redis-prod
         - mysql
     networks:
@@ -36,6 +35,7 @@ services:
   redis-prod:
     image: redis
     restart: always
+    container_name: redis
     command: redis-server /usr/local/etc/redis/redis.conf
     volumes:
       - /docker/redis/redis.conf:/usr/local/etc/redis/redis.conf
@@ -46,14 +46,15 @@ services:
           - iobroker-network
    
   mysql:
+        image: mysql/mysql-server:5.7
         restart: always
+        container_name: mysql
         expose:
             - "3306"
             - "33060"
         ports:
             - "3306:3306"
             - "33060:33060"
-        image: mysql/mysql-server:latest
         volumes:
             - ./mysql/init.sql:/docker-entrypoint-initdb.d/iobroker-init.sql
             - /docker/mysql/data:/var/lib/mysql
