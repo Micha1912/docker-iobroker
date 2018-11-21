@@ -24,18 +24,18 @@ services:
     hostname: iobroker
     container_name: iobroker
       links:
-        - redis
+        - redis-prod
         - mysql
     networks:
             - iobroker-network
     depends_on:
         - "mysql"
-        - "redis"
+        - "redis-prod"
    
-  redis:
+  redis-prod:
     image: redis
     restart: always
-    container_name: redis
+    container_name: redis-prod
     command: redis-server /usr/local/etc/redis/redis.conf
     volumes:
       - /docker/redis/redis.conf:/usr/local/etc/redis/redis.conf
