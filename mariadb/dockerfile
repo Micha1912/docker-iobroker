@@ -1,0 +1,11 @@
+FROM mysql:5.7
+MAINTAINER test@test.test
+#mysql config
+ARG password=xA123456
+
+ADD ./exec.sql /exec.sql
+ADD ./exec.sql /docker-entrypoint-initdb.d/exec.sql
+ADD ./mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf
+ENV MYSQL_ROOT_PASSWORD $password
+
+EXPOSE 3306
