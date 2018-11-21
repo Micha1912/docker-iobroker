@@ -7,12 +7,14 @@ services:
     build: ./iobroker
     container_name: iobroker
     depends_on: 
-      - mysql
+      - mariadb
+      #- mysql
       - redis-prod
     hostname: iobroker
     links: 
       - redis-prod
-      - mysql
+      #- mysql
+      - mariadb
     networks: 
       - iobroker-network
     ports: 
@@ -28,25 +30,42 @@ services:
     tty: true
     volumes: 
       - "/opt/iobroker:/opt/iobroker"
-  mysql: 
-    container_name: mysql
-    environment: 
-      MYSQL_ROOT_HOST: "%"
-      MYSQL_ROOT_PASSWORD: Test1234
-    expose: 
-      - "3306"
-      - "33060"
-    image: mysql
-    networks: 
+  # mysql: 
+    # container_name: mysql
+    # environment: 
+      # MYSQL_ROOT_HOST: "%"
+      # MYSQL_ROOT_PASSWORD: Test1234
+    # expose: 
+      # - "3306"
+      # - "33060"
+    # image: mysql
+    # networks: 
+      # - iobroker-network
+    # ports: 
+      # - "3306:3306"
+      # - "33060:33060"
+    # restart: always
+    # volumes: 
+      # - "./mysql/init.sql:/docker-entrypoint-initdb.d/iobroker-init.sql"
+      # #- "./mysql/my.cnf:/etc/mysql/my.cnf"
+      # - "/docker/mysql/data:/var/lib/mysql"
+      mariadb:
+    image: 'bitnami/mariadb:latest'
+    container_name: mariadb
+    ports:
+      - '3306:3306'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=user_iobroker
+      - MARIADB_PASSWORD=Test1234
+      - MARIADB_DATABASE=db_iobroker
+     restart: always
+     volumes: 
+      # - "./mysql/init.sql:/docker-entrypoint-initdb.d/iobroker-init.sql"
+      # #- "./mysql/my.cnf:/etc/mysql/my.cnf"
+       - "/docker/mysql/data:/bitnami/mariadb"
+     networks: 
       - iobroker-network
-    ports: 
-      - "3306:3306"
-      - "33060:33060"
-    restart: always
-    volumes: 
-      - "./mysql/init.sql:/docker-entrypoint-initdb.d/iobroker-init.sql"
-      #- "./mysql/my.cnf:/etc/mysql/my.cnf"
-      - "/docker/mysql/data:/var/lib/mysql"
   portainer: 
     command: "-H unix:///var/run/docker.sock"
     container_name: portainer
