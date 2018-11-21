@@ -55,7 +55,7 @@ services:
             - "33060:33060"
         image: mysql
         volumes:
-            #- ./mysql/init.sql:/docker-entrypoint-initdb.d/iobroker-init.sql
+            #- /docker/mysql/init.sql:/docker-entrypoint-initdb.d/iobroker-init.sql
             - /docker/mysql/data:/var/lib/mysql
         environment:
             #- MYSQL_RANDOM_ROOT_PASSWORD=yes
