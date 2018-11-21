@@ -32,7 +32,7 @@ services:
     container_name: mysql
     environment: 
       MYSQL_ROOT_PASSWORD: Test1234
-      MYSQL_ROOT_HOST: %
+      MYSQL_ROOT_HOST: "%"
     expose: 
       - "3306"
       - "33060"
@@ -45,6 +45,7 @@ services:
     restart: always
     volumes: 
       - "./mysql/init.sql:/docker-entrypoint-initdb.d/iobroker-init.sql"
+      - "./mysql/my.cnf:/etc/mysql/my.cnf"
       - "/docker/mysql/data:/var/lib/mysql"
   redis-prod: 
     command: "redis-server /usr/local/etc/redis/redis.conf"
