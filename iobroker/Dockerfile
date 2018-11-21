@@ -29,7 +29,7 @@ WORKDIR /opt/scripts/
 #RUN chmod +x avahi_startup.sh
 #RUN mkdir /var/run/dbus/
 
-#ADD scripts/iobroker_startup.sh iobroker_startup.sh
+#ADD /scripts/iobroker_startup.sh iobroker_startup.sh
 #RUN chmod +x iobroker_startup.sh
 
 WORKDIR /opt/iobroker/
