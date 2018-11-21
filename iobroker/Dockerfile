@@ -29,8 +29,8 @@ WORKDIR /opt/scripts/
 #RUN chmod +x avahi_startup.sh
 #RUN mkdir /var/run/dbus/
 
-ADD scripts/iobroker_startup.sh iobroker_startup.sh
-RUN chmod +x iobroker_startup.sh
+#ADD scripts/iobroker_startup.sh iobroker_startup.sh
+#RUN chmod +x iobroker_startup.sh
 
 WORKDIR /opt/iobroker/
 
@@ -38,6 +38,6 @@ RUN npm install iobroker --unsafe-perm && echo $(hostname) > .install_host
 RUN update-rc.d iobroker.sh remove
 RUN npm install node-gyp -g
 
-CMD ["sh", "/opt/scripts/iobroker_startup.sh"]
+#CMD ["sh", "/opt/scripts/iobroker_startup.sh"]
 
 ENV DEBIAN_FRONTEND teletype
