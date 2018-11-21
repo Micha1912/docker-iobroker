@@ -24,13 +24,13 @@ services:
     hostname: iobroker
     container_name: iobroker
       links:
-        - redis-prod
+        - redis
         - mysql
     networks:
             - iobroker-network
     depends_on:
         - "mysql"
-        - "redis-prod"
+        - "redis"
    
   redis-prod:
     image: redis
