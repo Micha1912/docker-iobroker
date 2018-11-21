@@ -1,69 +1,60 @@
-version: '3'
-
-services:
-  iobroker:
+--- 
+networks: 
+  iobroker-network: 
+    driver: bridge
+services: 
+  iobroker: 
+    build: ./iobroker
+    container_name: iobroker
+    depends_on: 
+      - mysql
+      - redis-prod
+    hostname: iobroker
+    links: 
+      - redis-prod
+      - mysql
+    networks: 
+      - iobroker-network
+    ports: 
+      - "1880:1880"
+      - "2001:2001"
+      - "8081:8081"
+      - "8282:8282"
+      - "8088:8088"
+      - "8284:8284"
     privileged: true
+    restart: always
     stdin_open: true
     tty: true
-    build: ./iobroker
+    volumes: 
+      - "/opt/iobroker:/opt/iobroker"
+  mysql: 
+    container_name: mysql
+    environment: 
+      MYSQL_ROOT_PASSWORD: Test1234
+    expose: 
+      - "3306"
+      - "33060"
+    image: "mysql/mysql-server:5.7"
+    networks: 
+      - iobroker-network
+    ports: 
+      - "3306:3306"
+      - "33060:33060"
     restart: always
-    ports:
-      - "1880:1880"  #node-red
-      #- "1883:1883"  #mqtt
-      - "2001:2001"  #homematic
-      - "8081:8081"  #iobroker admin
-      - "8282:8282"  #flot
-      - "8088:8088"  #terminal 
-      - "8284:8284"  #socketIO
-      #- "6666:6666/udp"  #tuya Adapter
-      #- "8887:8887"  #tuya proxy
-      #- "8889:8889"  #tuya proxy-web
-    volumes:
-      #- /dev:/dev
-      - /opt/iobroker:/opt/iobroker
-    hostname: iobroker
-    container_name: iobroker
-      links:
-        - redis-prod
-        - mysql
-    networks:
-            - iobroker-network
-    depends_on:
-        - "mysql"
-        - "redis-prod"
-   
-  redis-prod:
-    image: redis
-    restart: always
+    volumes: 
+      - "./mysql/init.sql:/docker-entrypoint-initdb.d/iobroker-init.sql"
+      - "/docker/mysql/data:/var/lib/mysql"
+  redis-prod: 
+    command: "redis-server /usr/local/etc/redis/redis.conf"
     container_name: redis-prod
-    command: redis-server /usr/local/etc/redis/redis.conf
-    volumes:
-      - /docker/redis/redis.conf:/usr/local/etc/redis/redis.conf
-      - /docker/redis/data:/data
-    ports:
+    image: redis
+    networks: 
+      - iobroker-network
+    ports: 
       - "6379:6379"
-    networks:
-          - iobroker-network
-   
-  mysql:
-        image: mysql/mysql-server:5.7
-        restart: always
-        container_name: mysql
-        expose:
-            - "3306"
-            - "33060"
-        ports:
-            - "3306:3306"
-            - "33060:33060"
-        volumes:
-            - ./mysql/init.sql:/docker-entrypoint-initdb.d/iobroker-init.sql
-            - /docker/mysql/data:/var/lib/mysql
-        environment:
-            #- MYSQL_RANDOM_ROOT_PASSWORD=yes
-            MYSQL_ROOT_PASSWORD: Test1234
-        networks:
-            - iobroker-network
-
-networks:
-    iobroker-network:
-        driver: bridge
+    restart: always
+    volumes: 
+      - "/docker/redis/redis.conf:/usr/local/etc/redis/redis.conf"
+      - "/docker/redis/data:/data"
+version: "3"
