@@ -32,7 +32,7 @@ services:
         - "mysql"
         - "redis"
    
-  redis-prod:
+  redis:
     image: redis
     restart: always
     container_name: redis
