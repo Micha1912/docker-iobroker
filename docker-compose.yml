@@ -2,7 +2,7 @@
  networks: 
   iobroker-network: 
     driver: bridge
-services: 
+ services: 
   iobroker: 
     build: ./iobroker
     container_name: iobroker
@@ -28,9 +28,9 @@ services:
     restart: always
     stdin_open: true
     tty: true
-    volumes: 
+    volumes:
       - "/opt/iobroker:/opt/iobroker"
-  # mysql: 
+      # mysql: 
     # container_name: mysql
     # environment: 
       # MYSQL_ROOT_HOST: "%"
