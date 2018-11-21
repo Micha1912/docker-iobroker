@@ -25,14 +25,14 @@ services:
     
     build: ./iobroker
     links:
-        - redis
+        - redis-prod
     networks:
             - iobroker-network
     depends_on:
         - "mysql"
-        - "redis"
+        - "redis-prod"
    
-   redis-prod:
+  redis-prod:
     image: redis
     restart: always
     command: redis-server /usr/local/etc/redis/redis.conf
