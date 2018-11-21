@@ -53,12 +53,13 @@ services:
         ports:
             - "3306:3306"
             - "33060:33060"
-        image: mysql/mysql-server:latest
+        image: mysql
         volumes:
             #- ./mysql/init.sql:/docker-entrypoint-initdb.d/iobroker-init.sql
             - /docker/mysql/data:/var/lib/mysql
         environment:
-            - MYSQL_RANDOM_ROOT_PASSWORD=yes
+            #- MYSQL_RANDOM_ROOT_PASSWORD=yes
+            MYSQL_ROOT_PASSWORD: Test1234
         networks:
             - iobroker-network
 
