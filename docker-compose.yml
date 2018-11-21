@@ -49,7 +49,7 @@
       # - "./mysql/init.sql:/docker-entrypoint-initdb.d/iobroker-init.sql"
       # #- "./mysql/my.cnf:/etc/mysql/my.cnf"
       # - "/docker/mysql/data:/var/lib/mysql"
-      mariadb:
+  mariadb:
     image: 'bitnami/mariadb:latest'
     container_name: mariadb
     ports:
@@ -59,12 +59,12 @@
       - MARIADB_USER=user_iobroker
       - MARIADB_PASSWORD=Test1234
       - MARIADB_DATABASE=db_iobroker
-     restart: always
-     volumes: 
+    restart: always
+    volumes: 
       # - "./mysql/init.sql:/docker-entrypoint-initdb.d/iobroker-init.sql"
       # #- "./mysql/my.cnf:/etc/mysql/my.cnf"
        - "/docker/mysql/data:/bitnami/mariadb"
-     networks: 
+    networks: 
       - iobroker-network
   portainer: 
     command: "-H unix:///var/run/docker.sock"
@@ -88,4 +88,4 @@
     volumes: 
       - "/docker/redis/redis.conf:/usr/local/etc/redis/redis.conf"
       - "/docker/redis/data:/data"
-version: "3"
+ version: "3"
