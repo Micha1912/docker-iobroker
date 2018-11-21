@@ -1,5 +1,5 @@
---- 
-networks: 
+---
+ networks: 
   iobroker-network: 
     driver: bridge
 services: 
