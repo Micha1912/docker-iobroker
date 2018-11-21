@@ -26,6 +26,7 @@ services:
     build: ./iobroker
     links:
         - redis-prod
+        - mysql
     networks:
             - iobroker-network
     depends_on:
