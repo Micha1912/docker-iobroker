@@ -18,8 +18,8 @@ services:
       #- "8887:8887"  #tuya proxy
       #- "8889:8889"  #tuya proxy-web
     volumes:
-      - /dev:/dev
-      - ./iobroker:/opt/iobroker
+      #- /dev:/dev
+      - /opt/iobroker:/opt/iobroker
     hostname: iobroker
     container_name: iobroker
     
@@ -40,7 +40,7 @@ services:
         image: mysql/mysql-server:latest
         volumes:
             #- ./mysql/init.sql:/docker-entrypoint-initdb.d/iobroker-init.sql
-            - ./mysql/data:/var/lib/mysql
+            - /docker/mysql/data:/var/lib/mysql
         environment:
             - MYSQL_RANDOM_ROOT_PASSWORD=yes
         networks:
