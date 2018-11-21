@@ -47,7 +47,7 @@
     restart: always
     volumes: 
      - "./mysql/init.sql:/docker-entrypoint-initdb.d/iobroker-init.sql"
-     - "./mysql/my.cnf:/etc/mysql/my.cnf"
+     #- "./mysql/my.cnf:/etc/mysql/my.cnf"
      - "/docker/mysql/data:/var/lib/mysql"
   portainer: 
     command: "-H unix:///var/run/docker.sock"
