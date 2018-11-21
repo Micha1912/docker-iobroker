@@ -7,14 +7,14 @@
     build: ./iobroker
     container_name: iobroker
     depends_on: 
-      - mariadb
-      #- mysql
+      #- mariadb
+      - mysql
       - redis-prod
     hostname: iobroker
     links: 
       - redis-prod
-      #- mysql
-      - mariadb
+      - mysql
+      #- mariadb
     networks: 
       - iobroker-network
     ports: 
