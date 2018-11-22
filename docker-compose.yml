@@ -48,8 +48,7 @@
     volumes: 
      - "./mysql/init.sql:/docker-entrypoint-initdb.d/iobroker-init.sql"
      - "./mysql/my.cnf:/etc/mysql/my.cnf"
-     - "/docker/mysql/data:/var/lib/mysql"
-     - "/docker/mysql/logs:/var/log/mysql/"
+     - db_data:/var/lib/mysql
   portainer: 
     command: "-H unix:///var/run/docker.sock"
     container_name: portainer
@@ -69,7 +68,9 @@
     ports: 
       - "6379:6379"
     restart: always
-    volumes: 
+    volumes:
+      db_data:
+        driver: "local"
       - "/docker/redis/redis.conf:/usr/local/etc/redis/redis.conf"
       - "/docker/redis/data:/data"
  version: "3"
