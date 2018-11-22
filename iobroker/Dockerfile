@@ -42,6 +42,6 @@ RUN npm install node-gyp -g
 
 RUN npm install node-gyp -g
 
-RUN iobroker start
+RUN ./iobroker start
 
 ENV DEBIAN_FRONTEND teletype
