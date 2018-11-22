@@ -35,7 +35,7 @@ WORKDIR /opt/scripts/
 WORKDIR /opt/iobroker/
 
 RUN npm install iobroker --unsafe-perm && echo $(hostname) > .install_host
-RUN update-rc.d iobroker.sh remove
+#RUN update-rc.d iobroker.sh remove
 RUN npm install node-gyp -g
 
 #CMD ["sh", "/opt/scripts/iobroker_startup.sh"]
