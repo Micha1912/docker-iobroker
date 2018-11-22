@@ -49,6 +49,7 @@
      - "./mysql/init.sql:/docker-entrypoint-initdb.d/iobroker-init.sql"
      - "./mysql/my.cnf:/etc/mysql/my.cnf"
      - "/docker/mysql/data:/var/lib/mysql"
+     - "/docker/mysql/logs:/var/log/mysql/"
   portainer: 
     command: "-H unix:///var/run/docker.sock"
     container_name: portainer
