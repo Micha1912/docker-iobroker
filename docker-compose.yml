@@ -60,15 +60,15 @@
     volumes: 
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/opt/portainer:/data"
-  #redis-prod: 
-    command: "redis-server /usr/local/etc/redis/redis.conf"
-    container_name: redis-prod
-    image: redis
-    networks: 
-      - iobroker-network
-    ports: 
-      - "6379:6379"
-    restart: always
+  # redis-prod: 
+    # command: "redis-server /usr/local/etc/redis/redis.conf"
+    # container_name: redis-prod
+    # image: redis
+    # networks: 
+      # - iobroker-network
+    # ports: 
+      # - "6379:6379"
+    # restart: always
  volumes:
     db_data:
       driver: "local"
