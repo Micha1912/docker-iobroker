@@ -9,10 +9,10 @@
     depends_on: 
       #- mariadb
       - mysql
-      - redis-prod
+      #- redis-prod
     hostname: iobroker
     links: 
-      - redis-prod
+      #- redis-prod
       - mysql
       #- mariadb
     networks: 
