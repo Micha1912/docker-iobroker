@@ -6,6 +6,7 @@
   iobroker: 
     build: ./iobroker
     container_name: iobroker
+    command: iobroker start
     depends_on: 
       #- mariadb
       - mysql
