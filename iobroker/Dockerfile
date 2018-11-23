@@ -1,6 +1,6 @@
 FROM debian:latest
 
-MAINTAINER Andre Germann <info@buanet.de>
+MAINTAINER Andre Germann <info@buanet.de> MK
 
 ENV DEBIAN_FRONTEND noninteractive
 
