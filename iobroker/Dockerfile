@@ -25,11 +25,11 @@ RUN mkdir -p /opt/scripts/ && chmod 777 /opt/scripts/
 
 WORKDIR /opt/scripts/
 
-ADD /scripts/avahi_startup.sh avahi_startup.sh
+ADD iobroker/scripts/avahi_startup.sh avahi_startup.sh
 RUN chmod +x avahi_startup.sh
 RUN mkdir /var/run/dbus/
 
-ADD /scripts/iobroker_startup.sh iobroker_startup.sh
+ADD iobroker/scripts/iobroker_startup.sh iobroker_startup.sh
 RUN chmod +x iobroker_startup.sh
 
 WORKDIR /opt/iobroker/
