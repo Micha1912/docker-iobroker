@@ -25,11 +25,11 @@ RUN mkdir -p /opt/scripts/ && chmod 777 /opt/scripts/
 
 WORKDIR /opt/scripts/
 
-ADD iobroker/scripts/avahi_startup.sh avahi_startup.sh
-RUN chmod +x avahi_startup.sh
-RUN mkdir /var/run/dbus/
+#ADD iobroker/scripts/avahi_startup.sh avahi_startup.sh
+#RUN chmod +x avahi_startup.sh
+#RUN mkdir /var/run/dbus/
 
-ADD iobroker/scripts/iobroker_startup.sh iobroker_startup.sh
+ADD /scripts/iobroker_startup.sh iobroker_startup.sh
 RUN chmod +x iobroker_startup.sh
 
 WORKDIR /opt/iobroker/
@@ -42,6 +42,7 @@ CMD ["sh", "/opt/scripts/iobroker_startup.sh"]
 
 RUN npm install node-gyp -g
 
-§CMD iobroker start
+#Test CMD iobroker start
+#CMD iobroker start
 
 ENV DEBIAN_FRONTEND teletype
